@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD-EXAMPLE-SPRING</title>
+    <script src="../static/js.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+<header>
+    <div>
+    <h1>CRUD-EXAMPLE-SPRING</h1>
+    <img src="./img/download.png" alt="" width="100px" height="100px">
+</div>
+</header>
+<main>
+    <form method="POST" action="/contatos" th:object="${contato}">
+        <div>
+            <label for="exampleInputEmail1" class="form-label">Endereço de Email</label>
+            <input type="email" class="form-control" th:field="*{email}" placeholder="example@example.com">
+            <label for="formGroupExampleInput" class="form-label">Nome</label>
+            <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o Nome">
+            <label for="inputPhone" class="form-label">Telefone</label>
+            <input type="tel" class="form-control" name="telefone" th:field="*{telefone}" placeholder="(00) 0000-0000" maxlength="11" required>
+            <label class="form-label">cpf</label>
+            <input type="text" placeholder="00000000-00" th:field="*{cpf}" maxlength="11" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="contato : ${contatos}">
+                <td th:text="${contato.nome}"></td>
+                <td th:text="${contato.email}"></td>
+                <td th:text="${contato.telefone}"></td>
+                <td th:text="${contato.cpf}"></td>
+                <td>
+                    <a th:href="@{'/edit?email=' + ${contato.email}}"><i class="fas fa-edit"></i>
+                        Editar</a>
+                    <a th:href="@{'/delete?email=' + ${contato.email}}"><i class="fas fa-trash"></i>
+                        Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    </div>
+</main>
+
+<footer>
+    <p>Developed by @ErikDev</p>
+</footer>
+
+</body>
+
+</html>
